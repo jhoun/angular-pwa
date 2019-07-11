@@ -6,14 +6,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { PeopleListComponent } from './people-list/people-list.component';
-import { PeopleSearchBarComponent } from './people-list/people-search-bar/people-search-bar.component';
+import { FilterPipe } from './people-list/filter.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     PeopleListComponent,
-    PeopleSearchBarComponent,
+    FilterPipe
   ],
   imports: [
     BrowserModule,

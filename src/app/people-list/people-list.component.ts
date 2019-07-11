@@ -16,23 +16,8 @@ export class PeopleListComponent implements OnInit {
     this.characterNames = ['Luke', 'Sunday', 'Han', 'Jack', 'Darth Vader']
   }
 
-  onClickAdded(inputData: {name: string}){
+  onClickDetail(inputData: {name: string}){
     console.log('inputData', inputData);
-
-    if (!this.characterNames.length){
-      this.characterNames = ['Luke', 'Sunday', 'Han', 'Jack', 'Darth Vader'];
-    }
-
-    if(inputData.name.length){
-      let filter = this.characterNames.filter((character: string) => {
-        return character.toLowerCase().includes(inputData.name);
-      })
-      this.characterNames = filter;
-    } else {
-      this.characterNames = ['Luke', 'Sunday', 'Han', 'Jack', 'Darth Vader']
-    }
-
-    console.log('this.characterNames', this.characterNames);
   }
 
 

@@ -1,13 +1,14 @@
 <div class="panel panel-primary" id="result_panel">
-  <app-people-search-bar
-  (inputKeyUp)="onClickAdded($event)"
-  >
-  </app-people-search-bar>
+  <input [(ngModel)]="searchText" placeholder="search text goes here" />
   <div class="panel-body">
-      <ul class="list-group" >
-          <li class="list-group-item" *ngFor="let characterName of characterNames" >
-            <strong>{{characterName}}</strong>
-          </li>
-      </ul>
+    <ul class="list-group">
+      <li
+        class="list-group-item"
+        *ngFor="let characterName of characterNames | filter: searchText"
+        (click)="onClickDetail($event)"
+      >
+        {{ characterName }}
+      </li>
+    </ul>
   </div>
 </div>
