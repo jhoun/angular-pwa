@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { BackendService } from '../services/backend.services';
 
 @Component({
   selector: 'app-people-list',
@@ -8,16 +9,30 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 })
 export class PeopleListComponent implements OnInit {
 
-  constructor() { }
+  constructor(private backend: BackendService) { }
 
-  characterNames: any;
+  characterNames: any[] = [];
+  characterDetails: any;
 
-  ngOnInit() {
-    this.characterNames = ['Luke', 'Sunday', 'Han', 'Jack', 'Darth Vader']
+  async ngOnInit() {
+    let characterData: any = await this.backend.getFirstCharacterBatch();
+    characterData.results.forEach((data: any) => {
+      this.characterNames.push(data.name)
+    })
+
+    while(characterData.next){
+      let moreCharacterData: any = await this.backend.getAllCharacterBatch(characterData.next)
+      moreCharacterData.results.forEach((data: any) => {
+        this.characterNames.push(data.name)
+      })
+      characterData = moreCharacterData;
+    }
   }
 
-  onClickDetail(inputData: {name: string}){
-    console.log('inputData', inputData);
+  async onClickDetail(event){
+    let characterData = await this.backend.getCharacterDetail(event.target.id);
+    this.characterDetails = characterData;
+    console.log('this.characterDetails', this.characterDetails);
   }
 
 
