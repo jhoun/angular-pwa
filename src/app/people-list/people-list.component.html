@@ -1,0 +1,13 @@
+<div class="panel panel-primary" id="result_panel">
+  <app-people-search-bar
+  (inputKeyUp)="onClickAdded($event)"
+  >
+  </app-people-search-bar>
+  <div class="panel-body">
+      <ul class="list-group" >
+          <li class="list-group-item" *ngFor="let characterName of characterNames" >
+            <strong>{{characterName}}</strong>
+          </li>
+      </ul>
+  </div>
+</div>

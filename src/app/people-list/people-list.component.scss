@@ -1,0 +1,16 @@
+html {
+  overflow: hidden;
+}
+
+.panel-body {
+  background-color: grey;
+  height: 100vh;
+}
+
+.list-group{
+  max-height: 100vw;
+  width: 100%;
+  margin-bottom: 10px;
+  overflow:scroll;
+  -webkit-overflow-scrolling: touch;
+}
