@@ -1,15 +1,14 @@
 <div class="panel panel-primary" id="result_panel">
   </div>
-  <h1 *ngIf="characterDetails">{{characterDetails.name}}</h1>
-  <h1 *ngIf="characterDetails">{{characterDetails.height}}</h1>
+  <h1 *ngIf="selectedCharacterInformation">{{selectedCharacterInformation.name}}</h1>
+  <h1 *ngIf="selectedCharacterInformation">{{selectedCharacterInformation.height}}</h1>
   <input [(ngModel)]="searchText" placeholder="search text goes here" />
   <div class="panel-body">
     <ul class="list-group">
       <li
         class="list-group-item"
-        *ngFor="let characterName of characterNames | filter: searchText ; let i = index"
+        *ngFor="let characterName of characterNames | filter: searchText"
         (click)="onClickDetail($event)"
-        id="{{i + 1}}"
       >
         {{ characterName }}
       </li>

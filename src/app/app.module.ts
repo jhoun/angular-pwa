@@ -6,14 +6,14 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
-import { PeopleListComponent } from './people-list/people-list.component';
-import { FilterPipe } from './people-list/filter.pipe';
+import { CharacterListComponent } from './character-list/character-list.component';
+import { FilterPipe } from './character-list/filter.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    PeopleListComponent,
+    CharacterListComponent,
     FilterPipe
   ],
   imports: [

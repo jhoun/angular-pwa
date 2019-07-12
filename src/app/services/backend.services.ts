@@ -13,9 +13,4 @@ export class BackendService {
   getAllCharacterBatch(pageURL: string): Promise<object> {
     return this.http.get(`${pageURL}`).toPromise();
   }
-
-  getCharacterDetail(characterName: string): Promise<object> {
-    return this.http.get(`https://swapi.co/api/people/${characterName}`).toPromise();
-  }
-
 }
