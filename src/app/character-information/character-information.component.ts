@@ -7,22 +7,27 @@ import { Router, NavigationExtras } from '@angular/router';
   styleUrls: ['./character-information.component.scss']
 })
 export class CharacterInformationComponent implements OnInit {
-  @Input() getClickedEventData:string;
-  @Input() getAllPlanetInformation: [];
+  @Input() characterData:string;
+  @Input() planetDataArr: [];
   constructor(private router: Router) { }
 
-  getSelectedPlanet:any;
   ngOnInit() {
   }
 
-  getHomeworld(event: Event){
-    let findPlanet = this.getAllPlanetInformation.find((data: any) => {
+  getSelectedPlanetData(event: Event){
+    const findPlanet = this.planetDataArr.find((data: any) => {
       return data.url === (<HTMLInputElement>event.target).className;
     })
 
-    this.getSelectedPlanet = findPlanet;
+    const planetPropsToRemove = ['edited', 'created', 'films', 'residents', 'url'];
 
-    const navigationExtras: NavigationExtras = {queryParams: findPlanet};
+    const removedPlanetProps = Object.keys(findPlanet)
+      .filter(prop => !planetPropsToRemove.includes(prop))
+      .map(prop => Object.assign({}, {[prop]: findPlanet[prop]}))
+      .reduce((obj, curr) => Object.assign(obj, curr), {});
+
+    const navigationExtras: NavigationExtras = {queryParams: removedPlanetProps};
+
     this.router.navigate(['/planet'], navigationExtras);
   }
 

@@ -10,7 +10,7 @@ export class BackendService {
     return this.http.get('https://swapi.co/api/people').toPromise();
   }
 
-  getAllCharacterBatch(pageURL: string): Promise<object> {
+  getDynamicPageUrl(pageURL: string): Promise<object> {
     return this.http.get(`${pageURL}`).toPromise();
   }
 }

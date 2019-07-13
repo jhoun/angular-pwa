@@ -1,14 +1,14 @@
-<div  *ngIf="getClickedEventData">
-  <p>{{getClickedEventData.name}}</p>
-  <p>{{getClickedEventData.birth_year}}</p>
-  <p>{{getClickedEventData.gender}}</p>
-  <p>{{getClickedEventData.height}}</p>
-  <p>{{getClickedEventData.mass}}</p>
+<div  *ngIf="characterData">
+  <p>{{characterData.name}}</p>
+  <p>{{characterData.birth_year}}</p>
+  <p>{{characterData.gender}}</p>
+  <p>{{characterData.height}}</p>
+  <p>{{characterData.mass}}</p>
 
   <div >
     <a
-      class="{{getClickedEventData.homeworld}}"
-      (click)="getHomeworld($event)"
+      class="{{characterData.homeworld}}"
+      (click)="getSelectedPlanetData($event)"
     >
       Home Planet
     </a>

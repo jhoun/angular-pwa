@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BackendService } from '../services/backend.services';
 
-
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -10,31 +9,30 @@ import { BackendService } from '../services/backend.services';
 export class HomeComponent implements OnInit {
   constructor(private backend: BackendService) {}
 
-  allCharacterData: any = [];
-  allPlanetData: any[] = [];
-  characterNames: any[] = [];
-  selectedCharacterInformation: any;
-  selectedPlanetInformation: any;
+  allCharacterData: Object[] = [];
+  allPlanetData: Object[] = [];
+  allCharacterNames: string[] = [];
+  selectedCharacterData: Object;
 
   async ngOnInit() {
     let characterData: any = await this.backend.getFirstCharacterBatch();
     characterData.results.forEach( async (data: any) => {
-      this.characterNames.push(data.name);
+      this.allCharacterNames.push(data.name);
       if(data.homeworld){
-        let homeworldData: any = await this.backend.getAllCharacterBatch(data.homeworld)
+        let homeworldData: any = await this.backend.getDynamicPageUrl(data.homeworld)
         this.allPlanetData.push(homeworldData);
       }
       this.allCharacterData.push(data);
     });
 
     while (characterData.next) {
-      let moreCharacterData: any = await this.backend.getAllCharacterBatch(
+      let moreCharacterData: any = await this.backend.getDynamicPageUrl(
         characterData.next
       );
       moreCharacterData.results.forEach( async (data: any) => {
-        this.characterNames.push(data.name);
+        this.allCharacterNames.push(data.name);
         if(data.homeworld){
-          let homeworldData: any = await this.backend.getAllCharacterBatch(data.homeworld)
+          let homeworldData: any = await this.backend.getDynamicPageUrl(data.homeworld)
           this.allPlanetData.push(homeworldData);
         }
         this.allCharacterData.push(data);
@@ -44,16 +42,9 @@ export class HomeComponent implements OnInit {
   }
 
   onClickedCharacter(event: any) {
-    let findCharacter = this.allCharacterData.find((data: any) => {
-      return data.name === event.data;
-    })
-    this.selectedCharacterInformation = findCharacter;
-  }
+    let findCharacter = this.allCharacterData
+      .find((data: any) => data.name === event.data);
 
-  onClickedPlanet(event: any) {
-    let findPlanet = this.allPlanetData.find((data: any) => {
-      return data.url === event.data;
-    })
-    this.selectedPlanetInformation = findPlanet;
+    this.selectedCharacterData = findCharacter;
   }
 }

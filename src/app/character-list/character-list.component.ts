@@ -9,7 +9,7 @@ import { Component, OnInit, Input, Output, EventEmitter, ViewEncapsulation } fro
 })
 export class CharacterListComponent implements OnInit {
   @Output() onClickCharacter = new EventEmitter<{data: string}>();
-  @Input() allCharacterNames: [];
+  @Input() characterNamesArr: [];
   constructor() { }
 
   ngOnInit() {
