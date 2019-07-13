@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter, ViewEncapsulation } from '@angular/core';
-import { BackendService } from '../services/backend.services';
+
 
 @Component({
   selector: 'app-character-list',
@@ -10,7 +10,7 @@ import { BackendService } from '../services/backend.services';
 export class CharacterListComponent implements OnInit {
   @Output() onClickCharacter = new EventEmitter<{data: string}>();
   @Input() allCharacterNames: [];
-  constructor(private backend: BackendService) { }
+  constructor() { }
 
   ngOnInit() {
   }

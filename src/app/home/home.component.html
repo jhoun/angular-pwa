@@ -1,0 +1,16 @@
+<div class="row">
+    <div class="col-md-4">
+      <app-character-list
+        [allCharacterNames]="characterNames"
+        (onClickCharacter)="onClickedCharacter($event)"
+      >
+      </app-character-list>
+    </div>
+    <div class="col-md-8">
+      <app-character-information
+        [getClickedEventData]="selectedCharacterInformation"
+        [getAllPlanetInformation]="allPlanetData"
+      >
+      </app-character-information>
+    </div>
+  </div>

@@ -1,4 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, Output, OnInit , EventEmitter} from '@angular/core';
+import { Router, NavigationExtras } from '@angular/router';
 
 @Component({
   selector: 'app-character-information',
@@ -7,9 +8,22 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class CharacterInformationComponent implements OnInit {
   @Input() getClickedEventData:string;
-  constructor() { }
+  @Input() getAllPlanetInformation: [];
+  constructor(private router: Router) { }
 
+  getSelectedPlanet:any;
   ngOnInit() {
+  }
+
+  getHomeworld(event: Event){
+    let findPlanet = this.getAllPlanetInformation.find((data: any) => {
+      return data.url === (<HTMLInputElement>event.target).className;
+    })
+
+    this.getSelectedPlanet = findPlanet;
+
+    const navigationExtras: NavigationExtras = {queryParams: findPlanet};
+    this.router.navigate(['/planet'], navigationExtras);
   }
 
 }

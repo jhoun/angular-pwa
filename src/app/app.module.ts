@@ -9,6 +9,9 @@ import { HeaderComponent } from './header/header.component';
 import { CharacterListComponent } from './character-list/character-list.component';
 import { FilterPipe } from './character-list/filter.pipe';
 import { CharacterInformationComponent } from './character-information/character-information.component';
+import { PlanetComponent } from './planet/planet.component';
+import { HomeComponent } from './home/home.component';
+
 
 @NgModule({
   declarations: [
@@ -16,7 +19,9 @@ import { CharacterInformationComponent } from './character-information/character
     HeaderComponent,
     CharacterListComponent,
     FilterPipe,
-    CharacterInformationComponent
+    CharacterInformationComponent,
+    PlanetComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,

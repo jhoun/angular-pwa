@@ -1,5 +1,4 @@
-import { Component, OnInit, Input, EventEmitter } from '@angular/core';
-import { BackendService } from './services/backend.services';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -9,35 +8,11 @@ import { BackendService } from './services/backend.services';
 export class AppComponent implements OnInit  {
   title = 'angular-pwa';
 
-  constructor(private backend: BackendService) {}
+  constructor() {}
 
-  allCharacterData: any = [];
-  characterNames: any[] = [];
-  selectedCharacterInformation: any;
 
-  async ngOnInit() {
-    let characterData: any = await this.backend.getFirstCharacterBatch();
-    characterData.results.forEach((data: any) => {
-      this.allCharacterData.push(data);
-      this.characterNames.push(data.name);
-    });
+  ngOnInit() {
 
-    while (characterData.next) {
-      let moreCharacterData: any = await this.backend.getAllCharacterBatch(
-        characterData.next
-      );
-      moreCharacterData.results.forEach((data: any) => {
-        this.allCharacterData.push(data);
-        this.characterNames.push(data.name);
-      });
-      characterData = moreCharacterData;
-    }
   }
 
-  onClickedCharacter(event: Event) {
-    let findCharacter = this.allCharacterData.find((data: any) => {
-      return data.name === event.data;
-    })
-    this.selectedCharacterInformation = findCharacter;
-  }
 }

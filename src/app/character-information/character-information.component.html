@@ -4,4 +4,13 @@
   <p>{{getClickedEventData.gender}}</p>
   <p>{{getClickedEventData.height}}</p>
   <p>{{getClickedEventData.mass}}</p>
+
+  <div >
+    <a
+      class="{{getClickedEventData.homeworld}}"
+      (click)="getHomeworld($event)"
+    >
+      Home Planet
+    </a>
+  </div>
 </div>
