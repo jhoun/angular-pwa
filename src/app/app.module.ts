@@ -8,13 +8,20 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { CharacterListComponent } from './character-list/character-list.component';
 import { FilterPipe } from './character-list/filter.pipe';
+import { CharacterInformationComponent } from './character-information/character-information.component';
+import { PlanetComponent } from './planet/planet.component';
+import { HomeComponent } from './home/home.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     CharacterListComponent,
-    FilterPipe
+    FilterPipe,
+    CharacterInformationComponent,
+    PlanetComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,

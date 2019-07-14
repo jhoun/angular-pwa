@@ -1,0 +1,16 @@
+<div  *ngIf="characterData">
+  <p>{{characterData.name}}</p>
+  <p>{{characterData.birth_year}}</p>
+  <p>{{characterData.gender}}</p>
+  <p>{{characterData.height}}</p>
+  <p>{{characterData.mass}}</p>
+
+  <div >
+    <a
+      class="{{characterData.homeworld}}"
+      (click)="getSelectedPlanetData($event)"
+    >
+      Home Planet
+    </a>
+  </div>
+</div>

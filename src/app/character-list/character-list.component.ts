@@ -1,5 +1,5 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { BackendService } from '../services/backend.services';
+import { Component, OnInit, Input, Output, EventEmitter, ViewEncapsulation } from '@angular/core';
+
 
 @Component({
   selector: 'app-character-list',
@@ -8,36 +8,16 @@ import { BackendService } from '../services/backend.services';
   encapsulation: ViewEncapsulation.None,
 })
 export class CharacterListComponent implements OnInit {
+  @Output() onClickCharacter = new EventEmitter<{data: string}>();
+  @Input() characterNamesArr: [];
+  constructor() { }
 
-  constructor(private backend: BackendService) { }
-
-  allCharacterData: any = [];
-  characterNames: any[] = [];
-  selectedCharacterInformation: any;
-
-  async ngOnInit() {
-    let characterData: any = await this.backend.getFirstCharacterBatch();
-    characterData.results.forEach((data: any) => {
-      this.allCharacterData.push(data);
-      this.characterNames.push(data.name)
-    })
-
-    while(characterData.next){
-      let moreCharacterData: any = await this.backend.getAllCharacterBatch(characterData.next)
-      moreCharacterData.results.forEach((data: any) => {
-        this.allCharacterData.push(data);
-        this.characterNames.push(data.name)
-      })
-      characterData = moreCharacterData;
-    }
+  ngOnInit() {
   }
 
-  async onClickDetail(event: Event){
-    let findCharacter = this.allCharacterData.find((data: any) => {
-      return data.name === (<HTMLInputElement>event.target).innerText;
+  onClickDetail(event: Event){
+    this.onClickCharacter.emit({
+      data: (<HTMLInputElement>event.target).innerText
     })
-    this.selectedCharacterInformation = findCharacter;
   }
-
-
 }
