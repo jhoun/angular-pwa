@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BackendService } from '../services/backend.services';
+import { getHomeWorld } from '../utility-function';
 
 @Component({
   selector: 'app-home',
@@ -18,24 +19,16 @@ export class HomeComponent implements OnInit {
     let characterData: any = await this.backend.getFirstCharacterBatch();
     characterData.results.forEach( async (data: any) => {
       this.allCharacterNames.push(data.name);
-      if(data.homeworld){
-        let homeworldData: any = await this.backend.getDynamicPageUrl(data.homeworld)
-        this.allPlanetData.push(homeworldData);
-      }
       this.allCharacterData.push(data);
+      getHomeWorld(data, this.allPlanetData, this.backend);
     });
 
     while (characterData.next) {
-      let moreCharacterData: any = await this.backend.getDynamicPageUrl(
-        characterData.next
-      );
+      let moreCharacterData: any = await this.backend.getDynamicPageUrl(characterData.next);
       moreCharacterData.results.forEach( async (data: any) => {
         this.allCharacterNames.push(data.name);
-        if(data.homeworld){
-          let homeworldData: any = await this.backend.getDynamicPageUrl(data.homeworld)
-          this.allPlanetData.push(homeworldData);
-        }
         this.allCharacterData.push(data);
+        getHomeWorld(data, this.allPlanetData, this.backend);
       });
       characterData = moreCharacterData;
     }
