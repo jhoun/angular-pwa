@@ -1,12 +1,15 @@
 <div class="panel panel-primary" id="result_panel">
   </div>
-  <input [(ngModel)]="searchText" placeholder="search text goes here" />
+  <div class="input-group mb-3 mt-3">
+    <input type="text" class="form-control" [(ngModel)]="searchText" placeholder="Search Character"  aria-label="Username" aria-describedby="basic-addon1">
+  </div>
   <div class="panel-body">
     <ul class="list-group">
       <li
         class="list-group-item"
         *ngFor="let characterName of characterNamesArr | filter: searchText"
-        (click)="onClickDetail($event)"
+        [ngClass]="{'active': selectedCharacter === characterName}"
+        (click)="onClickDetail($event, characterName)"
       >
         {{ characterName }}
       </li>

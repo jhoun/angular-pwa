@@ -1,6 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 
 import { CheckOfflineService } from '../services/offline.service';

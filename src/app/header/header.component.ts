@@ -11,7 +11,6 @@ import { Router } from '@angular/router';
 })
 export class HeaderComponent implements OnInit {
 
-  isClicked = true
   title:String;
   subscription: Subscription;
 
@@ -29,12 +28,11 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.title = localStorage.getItem('HeaderTitle');
+    this.title = !localStorage.length ? 'People' : localStorage.getItem('HeaderTitle');
   }
 
   onOfflineClick(){
-    this.checkOfflineService.toggleOnline(!this.isClicked);
-    this.isClicked = !this.isClicked;
+    this.checkOfflineService.toggleOnline(true);
   }
 
   onBackClick(){
