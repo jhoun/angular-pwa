@@ -2,13 +2,30 @@ import { Component, OnInit } from '@angular/core';
 import { BackendService } from '../services/backend.services';
 import { getHomeWorld } from '../utility-function';
 
+import { Subscription } from 'rxjs';
+
+import { CheckOfflineService } from '../services/offline.service'
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  constructor(private backend: BackendService) {}
+  subscription: Subscription;
+
+  constructor(
+    private backend: BackendService,
+    private checkOfflineService: CheckOfflineService
+  ) {
+    this.subscription = this.checkOfflineService
+    .getIsOffline()
+    .subscribe(message => {
+      localStorage.setItem('allCharacterData', JSON.stringify(this.allCharacterData));
+      localStorage.setItem('allPlanetData', JSON.stringify(this.allPlanetData));
+      localStorage.setItem('allCharacterNames', JSON.stringify(this.allCharacterNames));
+    });
+  }
 
   allCharacterData: Object[] = [];
   allPlanetData: Object[] = [];

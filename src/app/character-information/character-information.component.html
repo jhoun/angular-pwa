@@ -1,3 +1,4 @@
+<div *ngIf="isOffline; else elseBlock">Offline is no enabled</div>
 <div  *ngIf="characterData">
   <p>{{characterData.name}}</p>
   <p>{{characterData.birth_year}}</p>
