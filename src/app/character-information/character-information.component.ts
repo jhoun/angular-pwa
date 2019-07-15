@@ -1,9 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Router, NavigationExtras } from '@angular/router';
+import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 
-import { CheckOfflineService } from '../services/offline.service'
+import { CheckOfflineService } from '../services/offline.service';
+import { HeaderService } from '../services/header.service';
 
 @Component({
   selector: 'app-character-information',
@@ -18,8 +19,8 @@ export class CharacterInformationComponent implements OnInit{
   subscription: Subscription;
   constructor(
     private router: Router,
-    private route: ActivatedRoute,
-    private checkOfflineService: CheckOfflineService
+    private checkOfflineService: CheckOfflineService,
+    private headerService: HeaderService
   ) {
     this.subscription = this.checkOfflineService
       .getIsOffline()
@@ -46,6 +47,7 @@ export class CharacterInformationComponent implements OnInit{
 
       localStorage.setItem('allPlanetData', JSON.stringify(removedPlanetProps));
 
+      this.headerService.addHeaderTitle('Planet');
       this.router.navigate(['/planet']);
   }
 

@@ -2,7 +2,7 @@
   <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
       <ul class="navbar-nav mr-auto">
           <li class="nav-item active">
-              <a class="nav-link" href="#">Star Wars API</a>
+            <button *ngIf="title === 'Planet'" (click)="onBackClick()" >Back</button>
           </li>
       </ul>
   </div>
@@ -14,7 +14,7 @@
   </div>
   <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
       <div class="navbar-nav ml-auto">
-         <button (click)="onOfflineClick()">Go Offline</button>
+         <button *ngIf="title !== 'Planet'" (click)="onOfflineClick()">Go Offline</button>
       </div>
   </div>
 </nav>
