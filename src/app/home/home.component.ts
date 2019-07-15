@@ -1,10 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BackendService } from '../services/backend.services';
-import { getHomeWorld } from '../utility-function';
-
 import { Subscription } from 'rxjs';
-
-import { CheckOfflineService } from '../services/offline.service'
+import { CheckOfflineService } from '../services/offline.service';
 
 @Component({
   selector: 'app-home',
@@ -22,7 +19,6 @@ export class HomeComponent implements OnInit {
     .getIsOffline()
     .subscribe(message => {
       localStorage.setItem('allCharacterData', JSON.stringify(this.allCharacterData));
-      localStorage.setItem('allPlanetData', JSON.stringify(this.allPlanetData));
       localStorage.setItem('allCharacterNames', JSON.stringify(this.allCharacterNames));
     });
   }
@@ -37,7 +33,8 @@ export class HomeComponent implements OnInit {
     characterData.results.forEach( async (data: any) => {
       this.allCharacterNames.push(data.name);
       this.allCharacterData.push(data);
-      getHomeWorld(data, this.allPlanetData, this.backend);
+      let planetData: any = await this.backend.getDynamicPageUrl(data.homeworld)
+      this.allPlanetData.push(planetData);
     });
 
     while (characterData.next) {
@@ -45,7 +42,8 @@ export class HomeComponent implements OnInit {
       moreCharacterData.results.forEach( async (data: any) => {
         this.allCharacterNames.push(data.name);
         this.allCharacterData.push(data);
-        getHomeWorld(data, this.allPlanetData, this.backend);
+        let planetData: any = await this.backend.getDynamicPageUrl(data.homeworld)
+        this.allPlanetData.push(planetData);
       });
       characterData = moreCharacterData;
     }
@@ -56,5 +54,7 @@ export class HomeComponent implements OnInit {
       .find((data: any) => data.name === event.data);
 
     this.selectedCharacterData = findCharacter;
+
+    localStorage.setItem('selectedCharacterData', JSON.stringify(findCharacter));
   }
 }

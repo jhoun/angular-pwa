@@ -29,7 +29,7 @@ export class CharacterInformationComponent implements OnInit{
    }
 
   ngOnInit() {
-    this.characterData = JSON.parse(localStorage.getItem('allCharacterData'));
+    this.characterData = JSON.parse(localStorage.getItem('selectedCharacterData'));
   }
 
   getSelectedPlanetData(event: Event){
@@ -44,9 +44,9 @@ export class CharacterInformationComponent implements OnInit{
       .map(prop => Object.assign({}, {[prop]: findPlanet[prop]}))
       .reduce((obj, curr) => Object.assign(obj, curr), {});
 
-    const navigationExtras: NavigationExtras = {queryParams: removedPlanetProps};
+      localStorage.setItem('allPlanetData', JSON.stringify(removedPlanetProps));
 
-    this.router.navigate(['/planet'], navigationExtras);
+      this.router.navigate(['/planet']);
   }
 
 }

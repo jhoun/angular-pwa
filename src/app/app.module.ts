@@ -13,7 +13,6 @@ import { PlanetComponent } from './planet/planet.component';
 import { HomeComponent } from './home/home.component';
 import { CheckOfflineService } from './services/offline.service';
 
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -30,7 +29,7 @@ import { CheckOfflineService } from './services/offline.service';
     FormsModule,
     HttpClientModule
   ],
-  providers: [ CheckOfflineService ],
+  providers: [ CheckOfflineService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

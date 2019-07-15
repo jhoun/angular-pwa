@@ -1,4 +1,4 @@
-<div *ngIf="isOffline; else elseBlock">Offline is no enabled</div>
+<div *ngIf="isOffline">Offline is no enabled</div>
 <div  *ngIf="characterData">
   <p>{{characterData.name}}</p>
   <p>{{characterData.birth_year}}</p>
@@ -6,7 +6,7 @@
   <p>{{characterData.height}}</p>
   <p>{{characterData.mass}}</p>
 
-  <div >
+  <div>
     <a
       class="{{characterData.homeworld}}"
       (click)="getSelectedPlanetData($event)"
