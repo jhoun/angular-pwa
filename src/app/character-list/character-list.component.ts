@@ -1,6 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter, ViewEncapsulation } from '@angular/core';
 
-
 @Component({
   selector: 'app-character-list',
   templateUrl: './character-list.component.html',
@@ -13,6 +12,9 @@ export class CharacterListComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    if (localStorage.getItem('allCharacterNames')){
+      this.characterNamesArr = JSON.parse(localStorage.getItem('allCharacterNames'));
+    }
   }
 
   onClickDetail(event: Event){

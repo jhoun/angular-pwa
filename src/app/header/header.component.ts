@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
+
+import { CheckOfflineService } from '../services/offline.service'
 
 @Component({
   selector: 'app-header',
@@ -7,9 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() { }
+  constructor (private checkOfflineService: CheckOfflineService) { }
 
+  isClicked = true
   ngOnInit() {
   }
 
+  onOfflineClick(){
+    this.checkOfflineService.toggleOnline(!this.isClicked);
+    this.isClicked = !this.isClicked;
+  }
 }

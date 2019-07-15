@@ -1,17 +1,35 @@
-import { Component, Input, Output, OnInit , EventEmitter} from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router, NavigationExtras } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs';
+
+import { CheckOfflineService } from '../services/offline.service'
 
 @Component({
   selector: 'app-character-information',
   templateUrl: './character-information.component.html',
   styleUrls: ['./character-information.component.scss']
 })
-export class CharacterInformationComponent implements OnInit {
+export class CharacterInformationComponent implements OnInit{
   @Input() characterData:string;
   @Input() planetDataArr: [];
-  constructor(private router: Router) { }
+
+  isOffline: Boolean;
+  subscription: Subscription;
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    private checkOfflineService: CheckOfflineService
+  ) {
+    this.subscription = this.checkOfflineService
+      .getIsOffline()
+      .subscribe(message => {
+        this.isOffline= message.isOffline;
+      });
+   }
 
   ngOnInit() {
+    this.characterData = JSON.parse(localStorage.getItem('allCharacterData'));
   }
 
   getSelectedPlanetData(event: Event){

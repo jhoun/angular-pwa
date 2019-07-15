@@ -11,6 +11,7 @@ import { FilterPipe } from './character-list/filter.pipe';
 import { CharacterInformationComponent } from './character-information/character-information.component';
 import { PlanetComponent } from './planet/planet.component';
 import { HomeComponent } from './home/home.component';
+import { CheckOfflineService } from './services/offline.service';
 
 
 @NgModule({
@@ -29,7 +30,7 @@ import { HomeComponent } from './home/home.component';
     FormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [ CheckOfflineService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
