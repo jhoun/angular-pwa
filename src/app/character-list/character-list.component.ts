@@ -10,6 +10,7 @@ export class CharacterListComponent implements OnInit {
   @Output() onClickCharacter = new EventEmitter<{data: string}>();
   @Input() characterNamesArr: [];
   selectedCharacter: string;
+  searchText: string;
   constructor() { }
 
   ngOnInit() {

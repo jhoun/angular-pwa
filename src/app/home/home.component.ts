@@ -30,28 +30,31 @@ export class HomeComponent implements OnInit {
   selectedCharacterData: Object;
 
   async ngOnInit() {
-    let characterData: any = await this.backend.getFirstCharacterBatch();
-    characterData.results.forEach( async (data: any) => {
-      this.allCharacterNames.push(data.name);
-      this.allCharacterData.push(data);
-      let planetData: any = await this.backend.getDynamicPageUrl(data.homeworld)
-      this.allPlanetData.push(planetData);
-    });
-
-    while (characterData.next) {
-      let moreCharacterData: any = await this.backend.getDynamicPageUrl(characterData.next);
-      moreCharacterData.results.forEach( async (data: any) => {
+    if (!localStorage.allCharacterData){
+      let characterData: any = await this.backend.getFirstCharacterBatch();
+      characterData.results.forEach( async (data: any) => {
         this.allCharacterNames.push(data.name);
         this.allCharacterData.push(data);
         let planetData: any = await this.backend.getDynamicPageUrl(data.homeworld)
         this.allPlanetData.push(planetData);
       });
-      characterData = moreCharacterData;
+
+      while (characterData.next) {
+        let moreCharacterData: any = await this.backend.getDynamicPageUrl(characterData.next);
+        moreCharacterData.results.forEach( async (data: any) => {
+          this.allCharacterNames.push(data.name);
+          this.allCharacterData.push(data);
+          let planetData: any = await this.backend.getDynamicPageUrl(data.homeworld)
+          this.allPlanetData.push(planetData);
+        });
+        characterData = moreCharacterData;
+      }
     }
   }
 
   onClickedCharacter(event: any) {
-    let findCharacter = this.allCharacterData
+    let allCharacterData = !JSON.parse(localStorage.getItem('allCharacterData'))? this.allCharacterData : JSON.parse(localStorage.getItem('allCharacterData'));
+    let findCharacter = allCharacterData
       .find((data: any) => data.name === event.data);
 
     this.selectedCharacterData = findCharacter;

@@ -14,6 +14,8 @@ import { HomeComponent } from './home/home.component';
 import { CheckOfflineService } from './services/offline.service';
 
 import { HeaderService } from './services/header.service';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -29,7 +31,8 @@ import { HeaderService } from './services/header.service';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [ CheckOfflineService, HeaderService],
   bootstrap: [AppComponent]

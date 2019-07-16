@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 })
 export class HeaderComponent implements OnInit {
 
-  title:String;
+  title: string = 'People' ;
   subscription: Subscription;
 
   constructor (
@@ -28,7 +28,7 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.title = !localStorage.length ? 'People' : localStorage.getItem('HeaderTitle');
+    this.title = !localStorage.headerTitle ? 'People' : localStorage.getItem('HeaderTitle');
   }
 
   onOfflineClick(){

@@ -11,7 +11,7 @@ import { HeaderService } from '../services/header.service';
   styleUrls: ['./character-information.component.scss']
 })
 export class CharacterInformationComponent implements OnInit{
-  @Input() characterData:string;
+  @Input() characterData:any;
   @Input() planetDataArr: [];
 
   isOffline: Boolean;
