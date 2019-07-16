@@ -8,13 +8,22 @@ interface Planet {
   url: string
 }
 
+interface CharacterData {
+  name: string,
+  birth_year: string,
+  gender: string,
+  height: string,
+  mass: string,
+  homeworld: string
+}
+
 @Component({
   selector: 'app-character-information',
   templateUrl: './character-information.component.html',
   styleUrls: ['./character-information.component.scss']
 })
 export class CharacterInformationComponent implements OnInit{
-  @Input() characterData: Object;
+  @Input() characterData: CharacterData;
   @Input() planetDataArr: Array<string>;
 
   isOffline: boolean;

@@ -9,7 +9,7 @@
         class="list-group-item"
         *ngFor="let characterName of characterNamesArr | filter: searchText"
         [ngClass]="{'active': selectedCharacter === characterName}"
-        (click)="onClickDetail($event, characterName)"
+        (click)="onClickDetail($event)"
       >
         {{ characterName }}
       </li>
