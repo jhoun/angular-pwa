@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
 export class HeaderComponent implements OnInit {
   title: string;
   subscription: Subscription;
-  clicked:boolean;
+  clicked: boolean;
 
   constructor (
     private checkOfflineService: CheckOfflineService,
@@ -29,10 +29,14 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
     this.title = !localStorage.headerTitle ? 'People' : localStorage.getItem('HeaderTitle');
+    if (JSON.parse(localStorage.getItem('disabledClick'))){
+      this.clicked = JSON.parse(localStorage.getItem('disabledClick'))
+    }
   }
 
   onOfflineClick(): void {
     this.clicked = true;
+    localStorage.setItem('disabledClick', JSON.stringify(true));
     this.checkOfflineService.toggleOnline(true);
   }
 
