@@ -1,12 +1,12 @@
-<div class="row">
-    <div class="col-md-4">
+<div class="row flex-wrap-reverse">
+    <div class="col-sm-4">
       <app-character-list
         [characterNamesArr]="allCharacterNames"
         (onClickCharacter)="onClickedCharacter($event)"
       >
       </app-character-list>
     </div>
-    <div class="col-md-8">
+    <div class="col-sm-8">
       <app-character-information
         [characterData]="selectedCharacterData"
         [planetDataArr]="allPlanetData"

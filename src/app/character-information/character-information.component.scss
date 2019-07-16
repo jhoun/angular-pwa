@@ -1,0 +1,21 @@
+.content-container {
+  margin-top: 4rem;
+  line-height: 2rem;
+
+  .label-container {
+    padding-right: 1rem;
+    text-align: right;
+    font-weight: bold;
+  }
+
+  .data-container {
+    padding-left: 0;
+  }
+}
+
+.home-planet {
+  cursor: pointer;
+  color: blue;
+  text-decoration: underline;
+}
+

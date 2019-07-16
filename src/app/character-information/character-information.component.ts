@@ -1,9 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Router, NavigationExtras } from '@angular/router';
-import { ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 
-import { CheckOfflineService } from '../services/offline.service'
+import { CheckOfflineService } from '../services/offline.service';
+import { HeaderService } from '../services/header.service';
 
 @Component({
   selector: 'app-character-information',
@@ -18,8 +18,8 @@ export class CharacterInformationComponent implements OnInit{
   subscription: Subscription;
   constructor(
     private router: Router,
-    private route: ActivatedRoute,
-    private checkOfflineService: CheckOfflineService
+    private checkOfflineService: CheckOfflineService,
+    private headerService: HeaderService
   ) {
     this.subscription = this.checkOfflineService
       .getIsOffline()
@@ -29,11 +29,15 @@ export class CharacterInformationComponent implements OnInit{
    }
 
   ngOnInit() {
-    this.characterData = JSON.parse(localStorage.getItem('allCharacterData'));
+    if(localStorage.selectedCharacterData !== 'undefined'){
+      let selectedCharacterData = JSON.parse(localStorage.getItem('selectedCharacterData'))
+      this.characterData = selectedCharacterData;
+    }
   }
 
   getSelectedPlanetData(event: Event){
-    const findPlanet = this.planetDataArr.find((data: any) => {
+    let planetsData = !JSON.parse(localStorage.getItem('allPlanetData'))? this.planetDataArr : JSON.parse(localStorage.getItem('allPlanetData'));
+    const findPlanet = planetsData.find((data: any) => {
       return data.url === (<HTMLInputElement>event.target).className;
     })
 
@@ -44,9 +48,10 @@ export class CharacterInformationComponent implements OnInit{
       .map(prop => Object.assign({}, {[prop]: findPlanet[prop]}))
       .reduce((obj, curr) => Object.assign(obj, curr), {});
 
-    const navigationExtras: NavigationExtras = {queryParams: removedPlanetProps};
+      localStorage.setItem('selectedPlanetData', JSON.stringify(removedPlanetProps));
 
-    this.router.navigate(['/planet'], navigationExtras);
+      this.headerService.addHeaderTitle('Planet');
+      this.router.navigate(['/planet']);
   }
 
 }

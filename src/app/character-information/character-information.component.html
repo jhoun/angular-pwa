@@ -1,17 +1,25 @@
-<div *ngIf="isOffline; else elseBlock">Offline is no enabled</div>
-<div  *ngIf="characterData">
-  <p>{{characterData.name}}</p>
-  <p>{{characterData.birth_year}}</p>
-  <p>{{characterData.gender}}</p>
-  <p>{{characterData.height}}</p>
-  <p>{{characterData.mass}}</p>
-
-  <div >
-    <a
+<div *ngIf="isOffline">Offline is now enabled</div>
+<div class="row mx-auto content-container flex-nowrap" *ngIf="characterData">
+  <div class="label-container col-sm-5">
+      <div>Name:</div>
+      <div>Year of Birth:</div>
+      <div>Gender:</div>
+      <div>Height:</div>
+      <div>Mass:</div>
+  </div>
+  <div class="data-container col-sm-7">
+    <div>{{characterData.name}}</div>
+    <div>{{characterData.birth_year}}</div>
+    <div>{{characterData.gender}}</div>
+    <div>{{characterData.height}}</div>
+    <div>{{characterData.mass}}</div>
+    <p
       class="{{characterData.homeworld}}"
+      style="color: blue; cursor: pointer; "
       (click)="getSelectedPlanetData($event)"
     >
       Home Planet
-    </a>
+    </p>
   </div>
 </div>
+

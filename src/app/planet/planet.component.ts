@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-planet',
@@ -10,11 +9,10 @@ export class PlanetComponent implements OnInit {
 
   planetData:any;
 
-  constructor(private route: ActivatedRoute) {
-
+  constructor() {
   }
 
   ngOnInit() {
-    this.planetData = this.route.snapshot.queryParams
+    this.planetData = JSON.parse(localStorage.getItem('selectedPlanetData'));
   }
 }
