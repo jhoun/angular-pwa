@@ -1,7 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { BackendService } from '../services/backend.services';
+import { BackendService } from '../../services/backend.services';
 import { Subscription } from 'rxjs';
-import { CheckOfflineService } from '../services/offline.service';
+import { CheckOfflineService } from '../../services/offline.service';
+
+interface Character {
+  data?: string,
+  name?: string
+}
 
 @Component({
   selector: 'app-home',
@@ -10,6 +15,10 @@ import { CheckOfflineService } from '../services/offline.service';
 })
 export class HomeComponent implements OnInit {
   subscription: Subscription;
+  allCharacterData: Array<string> = [];
+  allPlanetData: Array<string>= [];
+  allCharacterNames: Array<string> = [];
+  selectedCharacterData: Object;
 
   constructor(
     private backend: BackendService,
@@ -24,12 +33,7 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  allCharacterData: Object[] = [];
-  allPlanetData: Object[] = [];
-  allCharacterNames: string[] = [];
-  selectedCharacterData: Object;
-
-  async ngOnInit() {
+  async ngOnInit(): Promise<void>{
     if (!localStorage.allCharacterData){
       let characterData: any = await this.backend.getFirstCharacterBatch();
       characterData.results.forEach( async (data: any) => {
@@ -52,10 +56,10 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  onClickedCharacter(event: any) {
+  onClickedCharacter(character: Character): void {
     let allCharacterData = !JSON.parse(localStorage.getItem('allCharacterData'))? this.allCharacterData : JSON.parse(localStorage.getItem('allCharacterData'));
     let findCharacter = allCharacterData
-      .find((data: any) => data.name === event.data);
+      .find((data: Character) => data.name === character.data);
 
     this.selectedCharacterData = findCharacter;
 

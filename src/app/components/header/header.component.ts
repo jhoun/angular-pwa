@@ -1,6 +1,6 @@
 import { Component, OnInit} from '@angular/core';
-import { CheckOfflineService } from '../services/offline.service';
-import { HeaderService } from '../services/header.service';
+import { CheckOfflineService } from '../../services/offline.service';
+import { HeaderService } from '../../services/header.service';
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
 
@@ -10,9 +10,9 @@ import { Router } from '@angular/router';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-
-  title: string = 'People' ;
+  title: string;
   subscription: Subscription;
+  clicked:boolean;
 
   constructor (
     private checkOfflineService: CheckOfflineService,
@@ -27,15 +27,16 @@ export class HeaderComponent implements OnInit {
       });
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.title = !localStorage.headerTitle ? 'People' : localStorage.getItem('HeaderTitle');
   }
 
-  onOfflineClick(){
+  onOfflineClick(): void {
+    this.clicked = true;
     this.checkOfflineService.toggleOnline(true);
   }
 
-  onBackClick(){
+  onBackClick(): void {
     this.headerService.addHeaderTitle('People');
     this.router.navigate(['/']);
   }
