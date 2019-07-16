@@ -1,3 +1,10 @@
-.navbar-title {
+.brand-container {
+  position: absolute;
   text-align: center;
+  width: 100%;
+}
+
+.btn {
+  position:relative;
+  z-index: 1;
 }

@@ -29,11 +29,14 @@ export class CharacterInformationComponent implements OnInit{
    }
 
   ngOnInit() {
-    this.characterData = JSON.parse(localStorage.getItem('selectedCharacterData'));
+    if(localStorage.selectedCharacterData !== 'undefined'){
+      let selectedCharacterData = JSON.parse(localStorage.getItem('selectedCharacterData'))
+      this.characterData = selectedCharacterData;
+    }
   }
 
   getSelectedPlanetData(event: Event){
-    const findPlanet = this.planetDataArr.find((data: any) => {
+    const findPlanet = JSON.parse(localStorage.getItem('allPlanetData')).find((data: any) => {
       return data.url === (<HTMLInputElement>event.target).className;
     })
 
@@ -44,7 +47,7 @@ export class CharacterInformationComponent implements OnInit{
       .map(prop => Object.assign({}, {[prop]: findPlanet[prop]}))
       .reduce((obj, curr) => Object.assign(obj, curr), {});
 
-      localStorage.setItem('allPlanetData', JSON.stringify(removedPlanetProps));
+      localStorage.setItem('selectedPlanetData', JSON.stringify(removedPlanetProps));
 
       this.headerService.addHeaderTitle('Planet');
       this.router.navigate(['/planet']);

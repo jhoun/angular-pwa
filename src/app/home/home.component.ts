@@ -20,6 +20,7 @@ export class HomeComponent implements OnInit {
     .subscribe(message => {
       localStorage.setItem('allCharacterData', JSON.stringify(this.allCharacterData));
       localStorage.setItem('allCharacterNames', JSON.stringify(this.allCharacterNames));
+      localStorage.setItem('allPlanetData', JSON.stringify(this.allPlanetData));
     });
   }
 
@@ -55,6 +56,6 @@ export class HomeComponent implements OnInit {
 
     this.selectedCharacterData = findCharacter;
 
-    localStorage.setItem('selectedCharacterData', JSON.stringify(findCharacter));
+    localStorage.setItem('selectedCharacterData', JSON.stringify(this.selectedCharacterData));
   }
 }

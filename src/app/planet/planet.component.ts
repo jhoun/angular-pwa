@@ -13,6 +13,6 @@ export class PlanetComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.planetData = JSON.parse(localStorage.getItem('allPlanetData'));
+    this.planetData = JSON.parse(localStorage.getItem('selectedPlanetData'));
   }
 }
