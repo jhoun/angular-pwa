@@ -1,15 +1,19 @@
 import { Injectable } from '@angular/core';
 import { Observable,Subject} from 'rxjs';
 
+interface HeaderTitle {
+  headerTitle: string;
+}
+
 @Injectable()
 export class HeaderService {
-  private subject = new Subject<any>();
+  private subject = new Subject<HeaderTitle>();
 
-  addHeaderTitle(title) {
+  addHeaderTitle(title: string) {
     this.subject.next({ headerTitle: title});
   }
 
-  getHeader(): Observable<any> {
+  getHeader(): Observable<HeaderTitle> {
     return this.subject.asObservable();
   }
 

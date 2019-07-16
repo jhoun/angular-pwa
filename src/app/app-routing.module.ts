@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { HomeComponent } from './home/home.component';
-import { PlanetComponent } from './planet/planet.component';
+import { HomeComponent } from './pages/home/home.component';
+import { PlanetComponent } from './pages/planet/planet.component';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent},

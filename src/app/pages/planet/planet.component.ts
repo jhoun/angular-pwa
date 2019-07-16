@@ -6,8 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./planet.component.scss']
 })
 export class PlanetComponent implements OnInit {
-
-  planetData:any;
+  planetData: Object;
 
   constructor() {
   }

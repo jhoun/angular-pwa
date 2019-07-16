@@ -1,3 +1,9 @@
+.offline {
+  text-align: center;
+  padding-top: 2rem;
+  color: green;
+}
+
 .content-container {
   margin-top: 4rem;
   line-height: 2rem;
@@ -10,12 +16,14 @@
 
   .data-container {
     padding-left: 0;
+
+    .home-planet {
+      cursor: pointer;
+      color: blue;
+      text-decoration: underline;
+    }
   }
 }
 
-.home-planet {
-  cursor: pointer;
-  color: blue;
-  text-decoration: underline;
-}
+
 

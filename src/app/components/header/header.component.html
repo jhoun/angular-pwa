@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-xl navbar-dark bg-dark">
+<nav class="navbar navbar-dark bg-dark">
   <div class="navbar-nav">
     <button
       class="btn btn-secondary"
@@ -9,12 +9,14 @@
     </button>
   </div>
   <div class="brand-container">
-    <div class="navbar-brand" href="#">{{ title }}</div>
+    <div class="navbar-brand">{{ title }}</div>
   </div>
   <div class="navbar-nav">
     <button
       class="btn btn-secondary"
       *ngIf="title !== 'Planet'"
+      [disabled]="clicked"
+      clicked = true;
       (click)="onOfflineClick()"
     >
       Go Offline

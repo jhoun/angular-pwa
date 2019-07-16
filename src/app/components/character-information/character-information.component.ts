@@ -1,9 +1,12 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { CheckOfflineService } from '../../services/offline.service';
+import { HeaderService } from '../../services/header.service';
 
-import { CheckOfflineService } from '../services/offline.service';
-import { HeaderService } from '../services/header.service';
+interface Planet {
+  url: string
+}
 
 @Component({
   selector: 'app-character-information',
@@ -11,10 +14,10 @@ import { HeaderService } from '../services/header.service';
   styleUrls: ['./character-information.component.scss']
 })
 export class CharacterInformationComponent implements OnInit{
-  @Input() characterData:string;
-  @Input() planetDataArr: [];
+  @Input() characterData: Object;
+  @Input() planetDataArr: Array<string>;
 
-  isOffline: Boolean;
+  isOffline: boolean;
   subscription: Subscription;
   constructor(
     private router: Router,
@@ -28,16 +31,16 @@ export class CharacterInformationComponent implements OnInit{
       });
    }
 
-  ngOnInit() {
+  ngOnInit(): void {
     if(localStorage.selectedCharacterData !== 'undefined'){
       let selectedCharacterData = JSON.parse(localStorage.getItem('selectedCharacterData'))
       this.characterData = selectedCharacterData;
     }
   }
 
-  getSelectedPlanetData(event: Event){
+  getSelectedPlanetData(event: Event): void{
     let planetsData = !JSON.parse(localStorage.getItem('allPlanetData'))? this.planetDataArr : JSON.parse(localStorage.getItem('allPlanetData'));
-    const findPlanet = planetsData.find((data: any) => {
+    const findPlanet = planetsData.find((data: Planet) => {
       return data.url === (<HTMLInputElement>event.target).className;
     })
 

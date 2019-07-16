@@ -1,15 +1,19 @@
 import { Injectable } from '@angular/core';
 import { Observable,Subject} from 'rxjs';
 
+interface IsOffline {
+  isOffline: boolean;
+}
+
 @Injectable()
 export class CheckOfflineService {
-  private subject = new Subject<any>();
+  private subject = new Subject<IsOffline>();
 
-  toggleOnline(boolean: Boolean) {
+  toggleOnline(boolean: boolean) {
     this.subject.next({ isOffline: boolean});
   }
 
-  getIsOffline(): Observable<any> {
+  getIsOffline(): Observable<IsOffline> {
     return this.subject.asObservable();
   }
 }
