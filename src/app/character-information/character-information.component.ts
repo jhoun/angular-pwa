@@ -36,7 +36,8 @@ export class CharacterInformationComponent implements OnInit{
   }
 
   getSelectedPlanetData(event: Event){
-    const findPlanet = JSON.parse(localStorage.getItem('allPlanetData')).find((data: any) => {
+    let planetsData = !JSON.parse(localStorage.getItem('allPlanetData'))? this.planetDataArr : JSON.parse(localStorage.getItem('allPlanetData'));
+    const findPlanet = planetsData.find((data: any) => {
       return data.url === (<HTMLInputElement>event.target).className;
     })
 
